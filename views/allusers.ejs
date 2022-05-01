@@ -1,0 +1,93 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <title>Users Database</title>
+        <meta name="viewport" content="width=device-width, initial-scale=1" />
+        <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-EVSTQN3/azprG1Anm3QDgpJLIm9Nao0Yz1ztcQTwFspd3yD65VohhpuuCOmLASjC" crossorigin="anonymous">
+    </head>
+    <style>
+        body{
+            background: #5433FF;  /* fallback for old browsers */
+            background: -webkit-linear-gradient(to right, #A5FECB, #20BDFF, #5433FF);  /* Chrome 10-25, Safari 5.1-6 */
+            background: linear-gradient(to right, #A5FECB, #20BDFF, #5433FF); /* W3C, IE 10+/ Edge, Firefox 16+, Chrome 26+, Opera 12+, Safari 7+ */
+        }
+        .box{
+            border: 1px solid rgba(240, 46, 170, 0.4);
+            margin: 0 auto;
+            width: 70%;
+            padding: 1%;
+            background-color: white;
+            opacity: 80%;
+            box-shadow: rgba(240, 46, 170, 0.4) 5px 5px, rgba(240, 46, 170, 0.3) 10px 10px, rgba(240, 46, 170, 0.2) 15px 15px, rgba(240, 46, 170, 0.1) 20px 20px, rgba(240, 46, 170, 0.05) 25px 25px;   
+            margin-bottom: 3%;
+        }
+
+        .vr{
+            border-right: 1px solid black;
+        }
+
+        .deletebutton{
+            float: right;
+        }
+
+    </style>
+    <body>
+        <nav class="navbar navbar-dark bg-dark">
+            <div class="container-fluid">
+              <span class="navbar-brand mb-0 h1">ATM</span>
+              <form action="/admin" method="get">
+                <button class="btn btn-dark">
+                    Dashboard
+                </button>
+              </form>
+              <form action="/editcustomer" method="get">
+                <button class="btn btn-dark">
+                    Modify Details
+                </button>
+              </form>
+              <form action="/logout" method="get">
+                <button class="btn btn-dark">
+                    Logout
+                </button>
+              </form>
+            </div>
+            
+          </nav>
+        <center><h1 style="color: white; margin-top: 2%; margin-bottom: 1%;">Users Database</h1></center>
+        <div class="box">
+            <%for(var i=0;i<1;i++){%>
+                <%var count=0%>
+                <%question.forEach(que=>{%>
+                    <%if(que.firstname!="admin"){%>
+                        <div class="row">
+                            <div class="col-lg-6 col-md-6 col-sm-6 vr">
+                                <h4>First name: <%= que.firstname %></h4>
+                                <h4>Last name: <%= que.lastname %></h4>
+                                <h4>Gender: <%=que.gender%></h4>
+                                <h4>Address: <%=que.address%></h4>
+                                <h4>Mobile: <%=que.mobile %></h4>
+                            </div>
+                            <div class="col-lg-6 col-md-6 col-sm-6">
+                                <form action="/setuser" method="post">
+                                    <div>
+                                        <h4>Username: <%=que.username%></h4>
+                                        <h4>Branch: <%=que.branch%></h4>
+                                        <h4>Branchid: <%=que.branchid%></h4>
+                                        <h4>Account No.: <%=que.Accountno%></h4>
+                                    </div>
+                                   
+                                </form>
+                            </div>
+                            <form action="/deleteuser" method="post">
+                                <input type="hidden" name="username" value="<%=que.username%>">
+                                <button class="btn btn-warning deletebutton">Delete User</button> 
+                            </form> 
+                            <hr style="margin-top: 1%;">
+                        </div> 
+                    <%}else{%>
+                    <%}%>  
+                <%})%>
+            <%}%>
+        </div>
+    </body>
+</html>

@@ -1,0 +1,129 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <title>Panel</title>
+        <meta name="viewport" content="width=device-width, initial-scale=1" />
+        <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-EVSTQN3/azprG1Anm3QDgpJLIm9Nao0Yz1ztcQTwFspd3yD65VohhpuuCOmLASjC" crossorigin="anonymous">
+    </head>
+    <style>
+        body{
+            background: #5433FF;  /* fallback for old browsers */
+            background: -webkit-linear-gradient(to right, #A5FECB, #20BDFF, #5433FF);  /* Chrome 10-25, Safari 5.1-6 */
+            background: linear-gradient(to right, #A5FECB, #20BDFF, #5433FF); /* W3C, IE 10+/ Edge, Firefox 16+, Chrome 26+, Opera 12+, Safari 7+ */
+        }
+        .rightbox{
+            border: 1px solid rgba(240, 46, 170, 0.4);
+            border-radius: 5%;
+            width: 70%;
+            margin: 0 auto;
+            margin-top: 7%;
+            padding: 1%;
+            margin-right: 5%;
+            float: right;
+            text-align: left;
+            background-color: white;
+            opacity: 80%;
+            box-shadow: rgba(240, 46, 170, 0.4) 5px 5px, rgba(240, 46, 170, 0.3) 10px 10px, rgba(240, 46, 170, 0.2) 15px 15px, rgba(240, 46, 170, 0.1) 20px 20px, rgba(240, 46, 170, 0.05) 25px 25px;   
+        }
+
+        .leftbox{
+            border: 1px solid rgba(240, 46, 170, 0.4);
+            border-radius: 2%;
+            width: 100%;
+            text-align: center;
+            margin-top: 25%;
+            margin-left: 5%;
+            float: left;
+            background-color: white;
+            opacity: 80%;
+            box-shadow: rgba(240, 46, 170, 0.4) 5px 5px, rgba(240, 46, 170, 0.3) 10px 10px, rgba(240, 46, 170, 0.2) 15px 15px, rgba(240, 46, 170, 0.1) 20px 20px, rgba(240, 46, 170, 0.05) 25px 25px;
+        }
+        
+
+        .flexstyle{
+            margin: 0 auto;
+            text-align: center;
+            display: flex;
+            justify-content: space-around;
+            margin-bottom: 1%;
+        }
+
+
+        .logoutbutton{
+            margin-top: 5%;
+        }
+
+    </style>
+    <body>
+        <nav class="navbar navbar-dark bg-dark">
+            <div class="container-fluid">
+              <span class="navbar-brand mb-0 h1">ATM</span>
+              <form action="/changepin" method="get">
+                  <button class="btn btn-dark">
+                      Change Pin
+                  </button>
+              </form>
+              <form action="/logout" method="get">
+                <button class="btn btn-dark">
+                    Logout
+                </button>
+              </form>
+            </div>
+            
+          </nav>
+        <center><h1 style="color: white; margin-top: 2%; margin-bottom: 1%;">Welcome To XYZ  ATM</h1></center>
+
+        
+            <div class="row">
+                
+                <div class="col-lg-6 col-md-6 col-sm-6">
+                    <div class="leftbox">
+                        <%if(question.pin==null && question.branchid==null){%>
+                            <h3>Your Branch Has Not Been Assigned</h3>
+                        <%}%>
+                        <%if(question.pin==null && question.branch!=null){%>
+                            <h3>Kindly Set Your Pin</h3>
+                            <form action="/setpin" method="post">
+                                <input type="hidden" name="username" value="<%=question.username%>">
+                                <label>Pin:</label>
+                                <input placeholder="Enter your PIN" name="pin">
+                                <button class="btn btn-success" style="margin-bottom: 1%;">Set</button>
+                            </form>
+                        <%}%>
+                        <%if(question.pin!=null){%>
+                            <h3>Pin: <%=question.pin%></h3>
+                            <div class="flexstyle">
+                                <form action="/addmoney" method="get">
+                                    <button class="btn btn-primary">Add Money</button>
+                                </form>
+                                <form action="/reducemoney" method="get">
+                                    <button class="btn btn-primary">Get Cash</button>
+                                </form>
+                                <form action="/fastcash" method="get">
+                                    <button class="btn btn-primary">Fast Cash</button>
+                                </form>
+                                <form action="/ministatement" method="get">
+                                    <button class="btn btn-primary">Get Mini Statement</button>
+                                </form>
+                            </div>
+                        <%}%>
+                    </div>
+                </div>
+                <div class="col-lg-6 col-md-6 col-sm-6">
+                    <div class="rightbox">
+                        <center><h2>My Profile</h2></center>
+                        <h2>Name: <%=question.firstname%> <%=question.lastname%></h2>
+                        <h2>Gender: <%=question.gender%></h2>
+                        <h2>Email: <%=question.username%></h2>
+                        <h2>Mobile: <%=question.mobile%></h2>
+                        <h2>Branch: <%=question.branch%></h2>
+                        <h2>Branch id: <%=question.branchid%></h2>
+                        <h2>Account No: <%=question.Accountno%></h2>
+                        <h2>Balance: <%=question.amount%></h2>
+                    </div>
+                </div>
+            </div>
+        
+        
+    </body>
+</html>
